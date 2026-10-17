@@ -17,6 +17,7 @@ export { AlwaysOnMicrophone } from "./AlwaysOnMicrophone";
 export { ShortcutActivationSetting } from "./ShortcutActivation";
 export { AudioFeedback } from "./AudioFeedback";
 export { ShowOverlay } from "./ShowOverlay";
+export { TranscriptionProvider } from "./TranscriptionProvider";
 export { GlobalShortcutInput } from "./GlobalShortcutInput";
 export { HandyKeysShortcutInput } from "./HandyKeysShortcutInput";
 export { ShortcutInput } from "./ShortcutInput";

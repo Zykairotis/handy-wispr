@@ -48,7 +48,7 @@ anyhow = "1.0.95"
 hound = "3.5.1"
 log = "0.4.25"
 env_filter = "0.1.0"
-tokio = "1.43.0"
+tokio = { version = "1.43.0", features = ["time"] }
 earshot = "1.2.2"
 enigo = "0.6.1"
 # Feedback sounds. No `recording`: microphone capture is handy-recorder's.
@@ -84,6 +84,8 @@ tauri-plugin-dialog = "2.6"
 hf-hub = { git = "https://github.com/cjpais/hf-hub", branch = "cancellable-downloads", features = [
   "tokio",
 ] }
+tokio-tungstenite = { version = "0.30.0", features = ["native-tls"] }
+base64 = "0.22"
 
 [target.'cfg(unix)'.dependencies]
 signal-hook = "0.3"

@@ -26,6 +26,7 @@ mod transcription_coordinator;
 mod tray;
 mod tray_i18n;
 mod utils;
+mod wispr;
 
 pub use cli::CliArgs;
 #[cfg(debug_assertions)]
@@ -758,6 +759,10 @@ pub fn run(cli_args: CliArgs) {
             commands::audio::get_microphone_channels,
             commands::audio::set_selected_channel,
             commands::transcription::set_model_unload_timeout,
+            commands::transcription::change_transcription_provider_setting,
+            commands::transcription::change_wispr_consent_setting,
+            commands::transcription::enable_wispr_cloud,
+            commands::transcription::get_wispr_token_status,
             commands::transcription::get_model_load_status,
             commands::transcription::unload_model_manually,
             commands::history::get_history_entries,

@@ -65,7 +65,8 @@
       }
     },
     "errors": {
-      "selectModel": "मॉडल चुना नहीं जा सका"
+      "selectModel": "मॉडल चुना नहीं जा सका",
+      "wispr": "Could not enable Wispr"
     },
     "permissions": {
       "title": "अनुमतियों की ज़रूरत है",
@@ -86,6 +87,12 @@
         "checkFailed": "अनुमतियां जांची नहीं जा सकीं. कृपया फिर से कोशिश करें.",
         "requestFailed": "अनुमति मांगी नहीं जा सकी. कृपया फिर से कोशिश करें."
       }
+    },
+    "wispr": {
+      "title": "Or use the cloud",
+      "description": "Skip the model download and transcribe with your Wispr account.",
+      "disclosure": "Recordings are uploaded to Wispr's servers. Requires the Wispr app to be signed in on this computer.",
+      "button": "Use Wispr"
     }
   },
   "modelSelector": {
@@ -171,6 +178,25 @@
           "hold_or_toggle": "रिकॉर्ड करने के लिए दबाए रखें या टॉगल करने के लिए टैप करें",
           "push_to_talk": "जब तक आप शॉर्टकट दबाए रखते हैं, रिकॉर्डिंग होती है",
           "toggle": "रिकॉर्डिंग शुरू करने के लिए शॉर्टकट टैप करें, रोकने के लिए फिर से टैप करें"
+        }
+      },
+      "transcriptionProvider": {
+        "title": "Transcription Provider",
+        "groupTitle": "Transcription Provider",
+        "description": "Choose where recordings are transcribed. Local models keep audio on this device; Wispr uploads it to Wispr's servers.",
+        "options": {
+          "local": "Local model",
+          "wispr": "Wispr (cloud)"
+        },
+        "token": {
+          "expired": "Your Wispr session has expired. Open the Wispr app to refresh it, then try again.",
+          "missing": "No Wispr session found. Sign in to the Wispr app on this computer."
+        },
+        "consent": {
+          "title": "Send audio to Wispr?",
+          "body": "With Wispr selected, each recording is uploaded to Wispr's servers for transcription using your signed-in Wispr session. If it fails, Handy will not fall back to another service. You can switch back to a local model at any time.",
+          "confirm": "Use Wispr",
+          "cancel": "Keep local"
         }
       }
     },

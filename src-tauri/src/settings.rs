@@ -145,6 +145,16 @@ pub enum OverlayStyle {
     Live,
 }
 
+/// Where recordings are transcribed. `Wispr` sends audio to Wispr's servers and
+/// only takes effect once `wispr_consent` is also set.
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, Eq, Type, Default)]
+#[serde(rename_all = "lowercase")]
+pub enum TranscriptionProvider {
+    #[default]
+    Local,
+    Wispr,
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, Eq, Type, Default)]
 #[serde(rename_all = "snake_case")]
 pub enum ModelUnloadTimeout {
@@ -535,6 +545,20 @@ pub struct AppSettings {
     /// `overlay_position` (position `none` → style `None`).
     #[serde(default = "default_overlay_style")]
     pub overlay_style: OverlayStyle,
+    /// Local models (default) or the Wispr cloud service.
+    #[serde(default)]
+    pub transcription_provider: TranscriptionProvider,
+    /// The user has acknowledged that Wispr transcription uploads audio.
+    #[serde(default)]
+    pub wispr_consent: bool,
+}
+
+impl AppSettings {
+    /// Cloud transcription is active only with explicit consent, so a stored
+    /// provider alone never uploads audio.
+    pub fn uses_wispr(&self) -> bool {
+        self.transcription_provider == TranscriptionProvider::Wispr && self.wispr_consent
+    }
 }
 
 fn default_model() -> String {
@@ -1022,6 +1046,8 @@ pub fn get_default_settings() -> AppSettings {
         vad_backend: VadBackend::default(),
         long_form_chunking: default_long_form_chunking(),
         overlay_style: default_overlay_style(),
+        transcription_provider: TranscriptionProvider::default(),
+        wispr_consent: false,
     }
 }
 
@@ -1598,6 +1624,25 @@ mod tests {
     fn default_overlay_style_is_live_when_overlay_defaults_on() {
         let settings = get_default_settings();
         assert_eq!(settings.overlay_style, OverlayStyle::Live);
+    }
+
+    #[test]
+    fn wispr_requires_consent_and_defaults_to_local() {
+        let mut settings = get_default_settings();
+        assert_eq!(
+            settings.transcription_provider,
+            TranscriptionProvider::Local
+        );
+        assert!(!settings.uses_wispr());
+
+        settings.transcription_provider = TranscriptionProvider::Wispr;
+        assert!(
+            !settings.uses_wispr(),
+            "provider alone must not enable upload"
+        );
+
+        settings.wispr_consent = true;
+        assert!(settings.uses_wispr());
     }
 
     #[test]

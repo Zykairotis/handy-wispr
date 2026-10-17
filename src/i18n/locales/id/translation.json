@@ -65,7 +65,8 @@
       }
     },
     "errors": {
-      "selectModel": "Gagal memilih model"
+      "selectModel": "Gagal memilih model",
+      "wispr": "Could not enable Wispr"
     },
     "permissions": {
       "title": "Izin Diperlukan",
@@ -86,6 +87,12 @@
         "checkFailed": "Gagal memeriksa izin. Silakan coba lagi.",
         "requestFailed": "Gagal meminta izin. Silakan coba lagi."
       }
+    },
+    "wispr": {
+      "title": "Or use the cloud",
+      "description": "Skip the model download and transcribe with your Wispr account.",
+      "disclosure": "Recordings are uploaded to Wispr's servers. Requires the Wispr app to be signed in on this computer.",
+      "button": "Use Wispr"
     }
   },
   "modelSelector": {
@@ -171,6 +178,25 @@
           "hold_or_toggle": "Tahan untuk merekam atau tekan untuk mulai/berhenti",
           "push_to_talk": "Merekam selama Anda menahan pintasan",
           "toggle": "Ketuk pintasan untuk mulai merekam, lalu ketuk lagi untuk berhenti"
+        }
+      },
+      "transcriptionProvider": {
+        "title": "Transcription Provider",
+        "groupTitle": "Transcription Provider",
+        "description": "Choose where recordings are transcribed. Local models keep audio on this device; Wispr uploads it to Wispr's servers.",
+        "options": {
+          "local": "Local model",
+          "wispr": "Wispr (cloud)"
+        },
+        "token": {
+          "expired": "Your Wispr session has expired. Open the Wispr app to refresh it, then try again.",
+          "missing": "No Wispr session found. Sign in to the Wispr app on this computer."
+        },
+        "consent": {
+          "title": "Send audio to Wispr?",
+          "body": "With Wispr selected, each recording is uploaded to Wispr's servers for transcription using your signed-in Wispr session. If it fails, Handy will not fall back to another service. You can switch back to a local model at any time.",
+          "confirm": "Use Wispr",
+          "cancel": "Keep local"
         }
       }
     },

@@ -1,5 +1,7 @@
 # Handy
 
+> **Unofficial fork (handy-wispr).** Not affiliated with or endorsed by the Handy project. It adds an **opt-in** Wispr cloud transcription provider (Settings → General → Transcription Provider). When selected, each recording is uploaded to Wispr's servers using the signed-in Wispr desktop session (`~/.config/Wispr Flow/session.json`, Linux only; read-only, never stored or refreshed). The default remains local, offline transcription, and there is no automatic fallback to the cloud. The statements below describe upstream Handy.
+
 [![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/invite/WVBeWsNXK4)
 
 **A free, open source, and extensible speech-to-text application that works completely offline.**

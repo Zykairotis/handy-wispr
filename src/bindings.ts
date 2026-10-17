@@ -862,6 +862,34 @@ async setSelectedChannel(channel: number | null) : Promise<Result<null, string>>
 async setModelUnloadTimeout(timeout: ModelUnloadTimeout) : Promise<void> {
     await TAURI_INVOKE("set_model_unload_timeout", { timeout });
 },
+/**
+ * Cloud transcription uploads audio, so it cannot be selected before the
+ * user has consented.
+ */
+async changeTranscriptionProviderSetting(provider: TranscriptionProvider) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_transcription_provider_setting", { provider }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Withdrawing consent also returns to local transcription.
+ */
+async changeWisprConsentSetting(enabled: boolean) : Promise<void> {
+    await TAURI_INVOKE("change_wispr_consent_setting", { enabled });
+},
+/**
+ * Onboarding path for users who skip downloading a local model. The click
+ * that calls this is the consent, so the UI must disclose the upload first.
+ */
+async enableWisprCloud() : Promise<void> {
+    await TAURI_INVOKE("enable_wispr_cloud");
+},
+async getWisprTokenStatus() : Promise<TokenStatus> {
+    return await TAURI_INVOKE("get_wispr_token_status");
+},
 async getModelLoadStatus() : Promise<Result<ModelLoadStatus, string>> {
     try {
     return { status: "ok", data: await TAURI_INVOKE("get_model_load_status") };
@@ -1042,7 +1070,15 @@ long_form_chunking?: boolean;
  * not gated on this — that follows model capability. Migrated from the old
  * `overlay_position` (position `none` → style `None`).
  */
-overlay_style?: OverlayStyle }
+overlay_style?: OverlayStyle; 
+/**
+ * Local models (default) or the Wispr cloud service.
+ */
+transcription_provider?: TranscriptionProvider; 
+/**
+ * The user has acknowledged that Wispr transcription uploads audio.
+ */
+wispr_consent?: boolean }
 export type AudioDevice = { index: string; name: string; is_default: boolean }
 export type AutoSubmitKey = "enter" | "ctrl_enter" | "cmd_enter"
 export type AvailableAccelerators = { transcribe: string[]; gpu_devices: GpuDeviceOption[] }
@@ -1224,7 +1260,13 @@ export type StreamWorkKind = "transcribing" | "polishing"
  * and `Dark` force one of the two palettes Handy already ships.
  */
 export type Theme = "system" | "light" | "dark"
+export type TokenStatus = "ok" | "expired" | "missing"
 export type TranscribeAcceleratorSetting = "auto" | "cpu" | "gpu"
+/**
+ * Where recordings are transcribed. `Wispr` sends audio to Wispr's servers and
+ * only takes effect once `wispr_consent` is also set.
+ */
+export type TranscriptionProvider = "local" | "wispr"
 export type TypingTool = "auto" | "wtype" | "kwtype" | "dotool" | "ydotool" | "xdotool"
 export type VadBackend = "silero" | "earshot"
 export type WindowsMicrophonePermissionStatus = { supported: boolean; overall_access: PermissionAccess; device_access: PermissionAccess; app_access: PermissionAccess; desktop_app_access: PermissionAccess }

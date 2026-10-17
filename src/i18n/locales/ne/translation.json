@@ -65,7 +65,8 @@
       }
     },
     "errors": {
-      "selectModel": "मोडेल चयन गर्न सकिएन"
+      "selectModel": "मोडेल चयन गर्न सकिएन",
+      "wispr": "Could not enable Wispr"
     },
     "permissions": {
       "title": "अनुमतिहरू आवश्यक छन्",
@@ -86,6 +87,12 @@
         "checkFailed": "अनुमतिहरू जाँच गर्न सकिएन। कृपया फेरि प्रयास गर्नुहोस्।",
         "requestFailed": "अनुमति अनुरोध गर्न सकिएन। कृपया फेरि प्रयास गर्नुहोस्।"
       }
+    },
+    "wispr": {
+      "title": "Or use the cloud",
+      "description": "Skip the model download and transcribe with your Wispr account.",
+      "disclosure": "Recordings are uploaded to Wispr's servers. Requires the Wispr app to be signed in on this computer.",
+      "button": "Use Wispr"
     }
   },
   "modelSelector": {
@@ -171,6 +178,25 @@
           "hold_or_toggle": "रेकर्ड गर्न थिचिराख्नुहोस् वा टगल गर्न ट्याप गर्नुहोस्",
           "push_to_talk": "सर्टकट थिचिराखेसम्म रेकर्ड गर्छ",
           "toggle": "रेकर्डिङ सुरु गर्न सर्टकट ट्याप गर्नुहोस्, रोक्न फेरि ट्याप गर्नुहोस्"
+        }
+      },
+      "transcriptionProvider": {
+        "title": "Transcription Provider",
+        "groupTitle": "Transcription Provider",
+        "description": "Choose where recordings are transcribed. Local models keep audio on this device; Wispr uploads it to Wispr's servers.",
+        "options": {
+          "local": "Local model",
+          "wispr": "Wispr (cloud)"
+        },
+        "token": {
+          "expired": "Your Wispr session has expired. Open the Wispr app to refresh it, then try again.",
+          "missing": "No Wispr session found. Sign in to the Wispr app on this computer."
+        },
+        "consent": {
+          "title": "Send audio to Wispr?",
+          "body": "With Wispr selected, each recording is uploaded to Wispr's servers for transcription using your signed-in Wispr session. If it fails, Handy will not fall back to another service. You can switch back to a local model at any time.",
+          "confirm": "Use Wispr",
+          "cancel": "Keep local"
         }
       }
     },

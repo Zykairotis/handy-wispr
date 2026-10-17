@@ -8,6 +8,7 @@ import type {
   ChineseScript,
   TranscribeAcceleratorSetting,
   ShortcutActivation,
+  TranscriptionProvider,
   VadBackend,
 } from "@/bindings";
 import { commands } from "@/bindings";
@@ -187,6 +188,17 @@ const settingUpdaters: {
       throw new Error(result.error);
     }
   },
+  transcription_provider: async (value) => {
+    const result = await commands.changeTranscriptionProviderSetting(
+      value as TranscriptionProvider,
+    );
+    if (result.status === "error") {
+      toast.error(result.error);
+      throw new Error(result.error);
+    }
+  },
+  wispr_consent: (value) =>
+    commands.changeWisprConsentSetting(value as boolean),
   filler_word_removal_enabled: (value) =>
     commands.changeFillerWordRemovalEnabledSetting(value as boolean),
   chinese_script: (value) =>
